@@ -1,5 +1,7 @@
 package stm.demo.model;
 
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;

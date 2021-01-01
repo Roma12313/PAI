@@ -25,12 +25,13 @@ public class Task {
     public Task() {
     }
 
-    public Task(String title, String description, LocalDateTime dateAdded, Type type, Status status) {
+    public Task(String title, String description, LocalDateTime dateAdded, Type type, Status status, User user) {
         this.title = title;
         this.description = description;
         this.dateAdded = dateAdded;
         this.type = type;
         this.status = status;
+        this.user = user;
     }
 
     public int getTaskId() {
@@ -79,5 +80,13 @@ public class Task {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
