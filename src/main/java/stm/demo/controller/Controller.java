@@ -1,8 +1,6 @@
 package stm.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import stm.demo.model.Task;
@@ -14,8 +12,6 @@ import stm.demo.service.UserService;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.Stack;
 
 @RestController
 @EnableSwagger2
@@ -29,11 +25,6 @@ public class Controller {
         this.taskService = taskService;
     }
     //a
-    @GetMapping("/users")
-    public List<User> getAllUsers(){
-        return userService.selectUsers();
-    }
-    //b
     @PostMapping("/users/create")
     public User createUser(
             @RequestParam("name") String name,
@@ -42,6 +33,12 @@ public class Controller {
             @RequestParam("password") String password
     ){
         return userService.insertUser(new User(name,lastName,email,password,false, LocalDateTime.now()));
+    }
+
+    //b
+    @GetMapping("/users")
+    public List<User> getAllUsers(){
+        return userService.selectUsers();
     }
     //c
     @GetMapping("users/IdOrEmail")
@@ -100,6 +97,7 @@ public class Controller {
     ) {
         return taskService.changeTaskStatus(taskId,status);
     }
+
 
 
 }
