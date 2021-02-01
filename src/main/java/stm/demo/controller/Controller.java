@@ -25,16 +25,7 @@ public class Controller {
         this.userService = userService;
         this.taskService = taskService;
     }
-    //a
-//    @PostMapping("/users/create")
-//    public User createUser(
-//            @RequestParam("name") String name,
-//            @RequestParam("lastName") String lastName,
-//            @RequestParam("email") String email,
-//            @RequestParam("password") String password
-//    ){
-//        return userService.insertUser(new User(name,lastName,email,password,false, LocalDateTime.now()));
-//    }
+
     @PostMapping("/users/create")
    public User createUser(@RequestBody User user){
     return userService.insertUser(user);
