@@ -1,10 +1,12 @@
 package stm.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import stm.demo.model.enums.Status;
 import stm.demo.model.enums.Type;
 
 import javax.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Entity
 public class Task {
@@ -13,19 +15,19 @@ public class Task {
     private int taskId;
     private String title;
     private String description;
-    private LocalDateTime dateAdded;
+    private LocalDate dateAdded;
     @Enumerated(value = EnumType.STRING)
     private Type type;
     @Enumerated(value = EnumType.STRING)
     private Status status;
-
+    @JsonIgnore
     @ManyToOne
     User user;
 
     public Task() {
     }
 
-    public Task(String title, String description, LocalDateTime dateAdded, Type type, Status status, User user) {
+    public Task(String title, String description, LocalDate dateAdded, Type type, Status status, User user) {
         this.title = title;
         this.description = description;
         this.dateAdded = dateAdded;
@@ -58,11 +60,11 @@ public class Task {
         this.description = description;
     }
 
-    public LocalDateTime getDateAdded() {
+    public LocalDate getDateAdded() {
         return dateAdded;
     }
 
-    public void setDateAdded(LocalDateTime dateAdded) {
+    public void setDateAdded(LocalDate dateAdded) {
         this.dateAdded = dateAdded;
     }
 

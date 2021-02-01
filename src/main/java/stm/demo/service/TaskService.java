@@ -1,18 +1,15 @@
 package stm.demo.service;
 
-import javafx.scene.control.TableColumn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import stm.demo.model.Task;
-import stm.demo.model.User;
 import stm.demo.model.enums.Status;
 import stm.demo.model.enums.Type;
 import stm.demo.repository.TaskRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
@@ -50,6 +47,8 @@ public class TaskService {
         task.setStatus(status);
         return taskRepository.save(task);
     }
-
+    public void deleteById(Integer id) {
+        taskRepository.deleteById(id);
+    }
 
 }

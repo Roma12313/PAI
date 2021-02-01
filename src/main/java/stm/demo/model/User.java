@@ -3,6 +3,7 @@ package stm.demo.model;
 import com.sun.istack.Nullable;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -17,15 +18,13 @@ public class User {
     private String email;
     private  String password;
     private boolean status;
-    private LocalDateTime registrationDateTime;
+    private LocalDate registrationDateTime;
 
 
 
 
 
-
-
-    public User(String name, String lastName, String email, String password, boolean status, LocalDateTime registrationDateTime) {
+    public User(String name, String lastName, String email, String password, boolean status, LocalDate registrationDateTime) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
@@ -86,11 +85,11 @@ public class User {
         this.status = status;
     }
 
-    public LocalDateTime getRegistrationDateTime() {
+    public LocalDate getRegistrationDateTime() {
         return registrationDateTime;
     }
 
-    public void setRegistrationDateTime(LocalDateTime registrationDateTime) {
+    public void setRegistrationDateTime(LocalDate registrationDateTime) {
         this.registrationDateTime = registrationDateTime;
     }
 }

@@ -1,6 +1,7 @@
 package stm.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import stm.demo.model.Task;
@@ -25,20 +26,29 @@ public class Controller {
         this.taskService = taskService;
     }
     //a
+//    @PostMapping("/users/create")
+//    public User createUser(
+//            @RequestParam("name") String name,
+//            @RequestParam("lastName") String lastName,
+//            @RequestParam("email") String email,
+//            @RequestParam("password") String password
+//    ){
+//        return userService.insertUser(new User(name,lastName,email,password,false, LocalDateTime.now()));
+//    }
     @PostMapping("/users/create")
-    public User createUser(
-            @RequestParam("name") String name,
-            @RequestParam("lastName") String lastName,
-            @RequestParam("email") String email,
-            @RequestParam("password") String password
-    ){
-        return userService.insertUser(new User(name,lastName,email,password,false, LocalDateTime.now()));
+   public User createUser(@RequestBody User user){
+    return userService.insertUser(user);
     }
 
     //b
     @GetMapping("/users")
     public List<User> getAllUsers(){
         return userService.selectUsers();
+    }
+
+    @GetMapping("/tasks")
+    public List<Task> getAllTasksF(){
+        return  taskService.selectTasks();
     }
     //c
     @GetMapping("users/IdOrEmail")
@@ -60,16 +70,20 @@ public class Controller {
         return userService.deleteUserById(userId);
     }
     //f
-    @PostMapping("/tasks/create")
-    public Task createTask(
-            @RequestParam("title") String title,
-            @RequestParam("description") String description,
-            @RequestParam("type") Type type,
-            @RequestParam("status") Status status,
-            @RequestParam("user_id") User userId
-
-    ){
-        return taskService.createTask(new Task(title,description,LocalDateTime.now(),type,status,userId));
+//    @PostMapping("/tasks/create")
+//    public Task createTask(
+//            @RequestParam("title") String title,
+//            @RequestParam("description") String description,
+//            @RequestParam("type") Type type,
+//            @RequestParam("status") Status status,
+//            @RequestParam("user_id") User userId
+//
+//    ){
+//        return taskService.createTask(new Task(title,description,LocalDateTime.now(),type,status,userId));
+//    }
+    @PostMapping("/task/create")
+    public Task createTask(@RequestBody Task task){
+        return taskService.createTask(task);
     }
     //g
     @GetMapping("/tasks/date")
@@ -83,11 +97,22 @@ public class Controller {
     }
 
     //j
-    @DeleteMapping("/tasks/delete")
-    public boolean deleteTaskById(
-            @RequestParam("taskId") int taskId
-    ){
-        return taskService.deleteTaskById(taskId);
+//    @DeleteMapping("/tasks/delete")
+//    public boolean deleteTaskById(
+//            @RequestParam("taskId") int taskId
+//    ){
+//        return taskService.deleteTaskById(taskId);
+//    }
+    @DeleteMapping("/userDelete/{id}")
+    public ResponseEntity<Void>deleteUser(@PathVariable Integer id){
+        userService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/taskDelete/{id}")
+    public ResponseEntity<Void>deleteTask(@PathVariable Integer id){
+        taskService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
     //i
     @PutMapping("/task/status/id={taskId}")

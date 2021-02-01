@@ -6,14 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import stm.demo.model.Task;
 import stm.demo.model.User;
-import stm.demo.model.enums.Status;
+
 import stm.demo.repository.TaskRepository;
 import stm.demo.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
+
 
 @Service
 public class UserService {
@@ -56,7 +55,9 @@ public class UserService {
         return userOptional.get().isStatus();
 
     }
-
+    public void deleteById(Integer id) {
+        userRepository.deleteById(id);
+    }
     //podpunkt e
     public boolean deleteUserById(int userId){
         Optional<User> optionalUser = userRepository.findById(userId);
@@ -69,5 +70,6 @@ public class UserService {
         }
         return false;
     }
+
 
 }
